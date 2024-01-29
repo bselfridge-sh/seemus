@@ -13,7 +13,7 @@ try {
     echo $e->getMessage();
 }
 
-$stmt = $conn->prepare("SELECT `IDauto`,`Name` FROM Seemus.tbTable");
+$stmt = $conn->prepare("SELECT `ID`, `IDauto`,`Name` FROM Seemus.tbTable");
 $stmt->execute();
 $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
@@ -30,7 +30,6 @@ if ($result) {
       echo "</tr>";
       $printedHeader=true;
     }
-    echo "<tr><td>".$row["IDauto"]."</td><td>".$row["Name"]."</td></tr>";
   }
   echo "</table>";
 } else {
