@@ -30,7 +30,13 @@ if ($result) {
       echo "</tr>";
       $printedHeader=true;
     }
-  }
+    echo "<tr>";      // Start Header Row
+    foreach($row as $col_name => $val)
+      {
+      echo "<td>$val</td>";    // Print Each Field Name
+      }
+      echo "</tr>";      // Start Header Row
+}
   echo "</table>";
 } else {
   echo "0 results";
