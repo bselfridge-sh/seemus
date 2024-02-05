@@ -1,8 +1,9 @@
 <?php
 
 class Utils {
-
+    
     public static function prettyPrint($sqlStmt) { 
+        global $conn;
         $stmt = $conn->prepare($sqlStmt);
         $stmt->execute();
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
