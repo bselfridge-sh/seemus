@@ -2,7 +2,7 @@
 
   $servername = "twyxt.io";
   $username = "seemus";
-  $password = "shROcks!";
+  $password = "shRocks!";
   $dbname = "seemus_bob";
   
 try {
