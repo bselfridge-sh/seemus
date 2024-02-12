@@ -1,5 +1,6 @@
 <?php
 include "include/top.inc.php";
+
 include "class/Utils.class.php";
 
 // Utils::prettyPrint("SELECT * FROM Seemus.tbTable;");
@@ -17,6 +18,9 @@ $activity = formRequest("activity");
         <?php
         switch($activity) {
             case "USER":
+                echo "issett: ".isset($_REQUEST["username"]) . "<BR>";
+                echo "formreq: ".formRequest("username") . "<BR>";
+
                 // User Logon
                 if(!isset($_REQUEST["username"])) {
                     ?>
