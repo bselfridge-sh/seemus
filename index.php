@@ -1,5 +1,5 @@
 <?php
-include "include/db.inc.php";
+include "include/top.php";
 include "class/Utils.class.php";
 // Utils::prettyPrint("SELECT * FROM Seemus.tbTable;");
 
@@ -68,5 +68,5 @@ if(isset($_REQUEST["activity"])) {
     </body>
 </html>
 <?php
-include "include/dbclose.inc.php";
+include "include/bottom.inc.php";
 ?>
