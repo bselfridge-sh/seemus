@@ -8,19 +8,41 @@ $activity = formRequest("activity");
 <html>
     <head>
         <title>Seemus</title>
+        <link rel="stylesheet" href="include/seemus.css">
     </head>
     <body>
         <div class="navigation" style="text-align:center">
-        <a href="index.php">HOME</a> | 
         <?php
-            if($_SESSION["Email"]) {
-                echo $_SESSION["FullName"] & " | ";
+            //HOME Navigation if NOT home page
+            if($activity!="") { 
+                ?>
+                <a href="index.php">HOME</a> | 
+                <?php
+            }
+            
+            //Admin Navigation Options
+            if($_SESSION["Admin"]==1) { 
+                ?>
+                <a href="index.php?activity=USERS">USERS</a> | 
+                <a href="index.php?activity=ACCESS">ACCESS</a> | 
+                <?php
+            }
+
+            //Admin AND Valid User Navigation Options
+            if($_SESSION["Admin"]==1 || $_SESSION["Email"]) { 
+                ?>
+                <a href="index.php?activity=CONTENT">CONTENT</a> | 
+                <a href="index.php?activity=USERS">FILES</a> | 
+                <?php
+            }
+            
+            //User Logon or Logoff Options
+            if($_SESSION["Email"]!="") {
+                ?><a href="index.php?activity=USER-LOGOFF" title="Logoff User: <?php echo $_SESSION["Email"]; ?>">LOGOFF</a><?php
             } else {
-                ?><a href="index.php?activity=USER">LOGON</a> | <?php
+                ?><a href="index.php?activity=USER">LOGON</a><?php
             }
             ?>
-            <a href="index.php?activity=USER-LOGOFF">LOGOFF</a>
-
         </div>
         <center><div class="body" style="width:500px;">
         <?php
@@ -44,20 +66,29 @@ $activity = formRequest("activity");
                     $stmt->execute();
                     $result = $stmt->fetchAll(); // Returns true/false if records exist
 
+                    //Any Valid Results back???
                     if($result) {
+                        //Valid Email Address so lets check the user's password
                         foreach($result as $row) {
                             $dbPassword     = $row["fdPassword"];
                             $formPassword = formRequest("password");
+
+                            //Check hashed password against the set Password in the Database
                             if( password_verify($formPassword,$dbPassword) ) {
-                                $_SESSION["FullName"]   = "Bob";
+                                // Valid Password and Username - Set Session Variables
+                                $_SESSION["FullName"]   = $row["fdFullName"];
                                 $_SESSION["Email"]      = $row["fdEmail"];
                                 $_SESSION["Admin"]      = $row["fdAdmin"];
-                                //redirectJS("USER","Welcome+back+".$_SESSION["FullName"]);
+
+                                //Redirect to Homepage with a welcome message!
+                                redirectJS("","Welcome+back+".$_SESSION["FullName"]);
                             } else {
-                                //redirectJS("USER","Bad+Email+or+Bad+Password","email_last=".formRequest("email"));
+                                //Redirect to USER LOGON with a bad logon message!
+                                redirectJS("USER","Bad+Email+or+Bad+Password","email_last=".formRequest("email"));
                             }
                         }
                     } else {
+                        //NOT a valid email address, Redirect to USER LOGON with a bad logon message!
                         redirectJS("USER","Bad+Email+and+Bad+Password","email_last=".formRequest("email"));
                     }
                 }
@@ -66,7 +97,10 @@ $activity = formRequest("activity");
             case "USER-LOGOFF":
                 // User Logout
                 $tmp_email = $_SESSION["Email"];
+                //Clear Session
                 session_destroy();
+
+                //Redirect to Home Screen with message!
                 redirectJS(""," successfully logged off!");
             break;
 
@@ -92,7 +126,7 @@ $activity = formRequest("activity");
 
             default:
                 //default viewing of content
-                echo "Welcome to SEEMUS!";
+                echo "DEFAULT SEEMUS SCREEN!";
             break;
         }
         ?>
