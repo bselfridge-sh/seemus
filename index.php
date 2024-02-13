@@ -6,9 +6,7 @@ $activity = formRequest("activity");
 
 ?>
 <html>
-    <head>
-        <title>Seemus</title>
-    </head>
+    <head><title>Seemus</title></head>
     <body>
         <a href="index.php?activity=USER">LOGON</a> | <br><br>
         <?php
