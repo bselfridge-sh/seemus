@@ -1,9 +1,7 @@
 <?php
 include "include/top.inc.php";
-
 include "class/Utils.class.php";
 
-// Utils::prettyPrint("SELECT * FROM Seemus.tbTable;");
 
 $activity = formRequest("activity");
 
@@ -13,8 +11,15 @@ $activity = formRequest("activity");
         <title></title>
     </head>
     <body>
-        <a href="index.php?activity=USER">LOGON</a>
-        
+        <a href="index.php?activity=USER">LOGON</a> | <br><br>
+        <?php
+            if(formRequest("reason")=="") {
+                echo "<br>";
+            } else {
+                echo "<em>" . formRequest("reason") . "</em><br>";
+            }
+        ?>
+        <br>
         <?php
 
         switch($activity) {

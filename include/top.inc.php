@@ -6,6 +6,11 @@
 // START SESSION MANAGEMENT
 session_start();
 
+
+// Utils::prettyPrint("SELECT * FROM Seemus.tbTable;");
+
+
+
 function formRequest($formName) {
   if(isset($_REQUEST[$formName])) {
     return $_REQUEST[$formName];
