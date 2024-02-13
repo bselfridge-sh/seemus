@@ -58,7 +58,9 @@ $activity = formRequest("activity");
 
             case "USER-LOGOFF":
                 // User Logout
+                $tmp_email = $_SESSION["Email"];
                 session_destroy();
+                redirectJS("","Successfully Logged Off","");
             break;
 
             case "VIEW":
