@@ -1,4 +1,5 @@
 <?php
+
 include "include/top.inc.php";
 include "class/Utils.class.php";
 
@@ -6,19 +7,20 @@ $activity = formRequest("activity");
 
 ?>
 <html>
-    <head><title>Seemus</title></head>
+    <head>
+        <title>Seemus</title>
+    </head>
     <body>
-        <div class="navigation"><a href="index.php?activity=USER">LOGON</a> | 
-        <a href="index.php?activity=USER-LOGOFF">LOGOFF</a> | 
+        <div class="navigation">
+            <a href="index.php?activity=USER">LOGON</a> | 
+            <a href="index.php?activity=USER-LOGOFF">LOGOFF</a>
         </div>
         
         <?php
             if(!formRequest("reason")=="") {
                 echo "<div class=\"reason\">" . formRequest("reason") . "</div>";
             }
-        ?>
-        <br>
-        <?php
+
         switch($activity) {
             case "USER": // User Logon
                 if(formRequest("email") == "") {
@@ -30,7 +32,6 @@ $activity = formRequest("activity");
                         <input type="submit" value="Logon" />
                     </form>
                     <?php
-
                 } else {
                     $stmt = $conn->prepare("SELECT * FROM tbUsers WHERE fdEmail='".formRequest("email")."'");
                     $stmt->execute();
@@ -46,18 +47,18 @@ $activity = formRequest("activity");
                                 $_SESSION["Email"]      = $row["fdEmail"];
                                 $_SESSION["Admin"]      = $row["fdAdmin"];
                             } else {
-                                echo('<script>window.location=\'index.php?activity=USER&email_last='.formRequest("email").'&reason=Bad+Email+or+Bad+Password\';</script>');
+                                redirectJS("USER","Bad+Email+or+Bad+Password","email_last=".formRequest("email"));
                             }
                         }
                     } else {
-                        echo('<script>window.location=\'index.php?activity=USER&email_last='.formRequest("email").'&reason=Wrong+Email+or+Bad+Password\';</script>');
+                        redirectJS("USER","Wrong+Email+or+Bad+Password","email_last=".formRequest("email"));
                     }
                 }
             break;
 
             case "USER-LOGOFF":
                 // User Logout
-                
+                session_destroy();
             break;
 
             case "VIEW":
