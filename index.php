@@ -11,11 +11,18 @@ $activity = formRequest("activity");
         <title>Seemus</title>
     </head>
     <body>
-        <div class="navigation">
-            <a href="index.php?activity=USER">LOGON</a> | 
+        <div class="navigation" style="text-align:right">
+        <?php
+            if($_SESSION["Email"]) {
+                echo $_SESSION["Email"] & " | ";
+            } else {
+                ?><a href="index.php?activity=USER">LOGON</a> | <?php
+            }
+            ?>
             <a href="index.php?activity=USER-LOGOFF">LOGOFF</a>
+
         </div>
-        
+        <div class="body">
         <?php
             if(!formRequest("reason")=="") {
                 echo "<div class=\"reason\">" . formRequest("reason") . "</div>";
@@ -88,6 +95,7 @@ $activity = formRequest("activity");
             break;
         }
         ?>
+        </div>
 <?php
 include "include/bottom.inc.php";
 ?>
