@@ -7,7 +7,7 @@ $activity = formRequest("activity");
 ?>
 <html>
     <head>
-        <title></title>
+        <title>Seemus</title>
     </head>
     <body>
         <a href="index.php?activity=USER">LOGON</a> | <br><br>
