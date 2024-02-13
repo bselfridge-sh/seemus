@@ -8,7 +8,9 @@ $activity = formRequest("activity");
 <html>
     <head><title>Seemus</title></head>
     <body>
-        <a href="index.php?activity=USER">LOGON</a> | <br><br>
+        <a href="index.php?activity=USER">LOGON</a> | 
+        <a href="index.php?activity=USER-LOGOFF">LOGOFF</a> | 
+        <br><br>
         <?php
             if(formRequest("reason")=="") {
                 echo "<br>";
@@ -18,11 +20,8 @@ $activity = formRequest("activity");
         ?>
         <br>
         <?php
-
         switch($activity) {
-            case "USER":
-
-                // User Logon
+            case "USER": // User Logon
                 if(formRequest("email") == "") {
                     if(formRequest("reason")!="") {
                         
@@ -60,7 +59,7 @@ $activity = formRequest("activity");
                 }
             break;
 
-            case "LOGOUT":
+            case "USER-LOGOFF":
                 // User Logout
                 
             break;
