@@ -51,7 +51,7 @@ $activity = formRequest("activity");
                             }
                         }
                     } else {
-                        redirectJS("USER","Wrong+Email+or+Bad+Password","email_last=".formRequest("email"));
+                        redirectJS("USER","Bad+Email+and+Bad+Password","email_last=".formRequest("email"));
                     }
                 }
             break;
