@@ -1,5 +1,4 @@
 <?php
-
 include "include/top.inc.php";
 include "class/Utils.class.php";
 
