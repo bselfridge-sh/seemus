@@ -13,10 +13,8 @@ $activity = formRequest("activity");
         </div>
         <div class="reason">
         <?php
-            if(formRequest("reason")=="") {
-                echo "<br>";
-            } else {
-                echo "<em>" . formRequest("reason") . "</em><br>";
+            if(!formRequest("reason")=="") {
+                echo "<em>" . formRequest("reason") . "</em>";
             }
         ?>
         </div>
