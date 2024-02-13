@@ -11,7 +11,7 @@ $activity = formRequest("activity");
         <title>Seemus</title>
     </head>
     <body>
-        <div class="navigation" style="text-align:right">
+        <div class="navigation" style="text-align:center">
         <?php
             if($_SESSION["Email"]) {
                 echo $_SESSION["Email"] & " | ";
@@ -22,7 +22,7 @@ $activity = formRequest("activity");
             <a href="index.php?activity=USER-LOGOFF">LOGOFF</a>
 
         </div>
-        <div class="body">
+        <center><div class="body" style="width:500px;">
         <?php
             if(!formRequest("reason")=="") {
                 echo "<div class=\"reason\">" . formRequest("reason") . "</div>";
@@ -95,7 +95,7 @@ $activity = formRequest("activity");
             break;
         }
         ?>
-        </div>
+        </div></center>
 <?php
 include "include/bottom.inc.php";
 ?>
