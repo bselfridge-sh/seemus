@@ -11,13 +11,12 @@ $activity = formRequest("activity");
         <div class="navigation"><a href="index.php?activity=USER">LOGON</a> | 
         <a href="index.php?activity=USER-LOGOFF">LOGOFF</a> | 
         </div>
-        <div class="reason">
+        
         <?php
             if(!formRequest("reason")=="") {
-                echo "<em>" . formRequest("reason") . "</em>";
+                echo "<div class=\"reason\">" . formRequest("reason") . "</div>";
             }
         ?>
-        </div>
         <br>
         <?php
         switch($activity) {
