@@ -3,3 +3,5 @@
 $conn = null;
 
 ?>
+</body>
+</html>

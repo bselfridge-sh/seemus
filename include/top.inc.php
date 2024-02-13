@@ -3,8 +3,8 @@
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
+// START SESSION MANAGEMENT
 session_start();
-
 
 function formRequest($formName) {
   if(isset($_REQUEST[$formName])) {
@@ -14,10 +14,10 @@ function formRequest($formName) {
   }
 }
 
-  $servername = "twyxt.io";
-  $username = "seemus";
-  $password = "shRocks!";
-  $dbname = "seemus_bob";
+$servername = "twyxt.io";
+$username = "seemus";
+$password = "shRocks!";
+$dbname = "seemus_bob";
   
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);

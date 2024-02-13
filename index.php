@@ -16,23 +16,45 @@ $activity = formRequest("activity");
         <a href="index.php?activity=USER">LOGON</a>
         
         <?php
+
         switch($activity) {
             case "USER":
-                echo "issett: ".isset($_REQUEST["username"]) . "<BR>";
-                echo "formreq: ".formRequest("username") . "<BR>";
 
                 // User Logon
-                if(!isset($_REQUEST["username"])) {
+                if(formRequest("email") == "") {
+                    if(formRequest("reason")!="") {
+                        
+                    }
                     ?>
                     <form action="index.php" method=post >
                         <input type="hidden" name="activity" value="USER" />
-                        <input type="text" name="email" placeholder="Username / Email" />
+                        <input type="text" name="email" placeholder="Email" />
                         <input type="text" name="password" placeholder="Password" />
                         <input type="submit" value="Logon" />
                     </form>
                     <?php
+
                 } else {
-                    echo $_REQUEST["email"] . ": " . password_hash($_REQUEST["password"],NULL) . " is logged on";
+                    $stmt = $conn->prepare("SELECT * FROM tbUsers WHERE fdEmail='".formRequest("email")."'");
+                    $stmt->execute();
+                    $result = $stmt->fetchAll();
+
+                    if($result) {
+                        foreach($result as $row) {
+                            $dbPassword     = $row["fdPassword"];
+                            $formPassword = formRequest("password");
+
+                            if( password_verify($formPassword,$dbPassword) ) {
+                                $_SESSION["FullName"]   = $row["fdFullName"];
+                                $_SESSION["Email"]      = $row["fdEmail"];
+                                $_SESSION["Admin"]      = $row["fdAdmin"];
+                            } else {
+                                echo('<script>window.location=\'index.php?activity=USER&reason=Bad+Username+or+Password\';</script>');
+                            }
+                        }
+                    } else {
+                        echo('<script>window.location=\'index.php?activity=USER&reason=Bad+Username+or+Password\';</script>');
+                    }
                 }
             break;
 
@@ -66,8 +88,6 @@ $activity = formRequest("activity");
             break;
         }
         ?>
-    </body>
-</html>
 <?php
 include "include/bottom.inc.php";
 ?>
