@@ -4,7 +4,9 @@
 // error_reporting(E_ALL);
 
 // START SESSION MANAGEMENT
-session_start();
+if(!$_SESSION["Email"]) {
+  session_start();
+}
 
 
 // Utils::prettyPrint("SELECT * FROM Seemus.tbTable;");

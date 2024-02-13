@@ -15,7 +15,7 @@ $activity = formRequest("activity");
         <a href="index.php">HOME</a> | 
         <?php
             if($_SESSION["Email"]) {
-                echo $_SESSION["Email"] & " | ";
+                echo $_SESSION["FullName"] & " | ";
             } else {
                 ?><a href="index.php?activity=USER">LOGON</a> | <?php
             }
@@ -49,14 +49,13 @@ $activity = formRequest("activity");
                         foreach($result as $row) {
                             $dbPassword     = $row["fdPassword"];
                             $formPassword = formRequest("password");
-
                             if( password_verify($formPassword,$dbPassword) ) {
-                                $_SESSION["FullName"]   = $row["fdFullName"];
+                                $_SESSION["FullName"]   = "Bob";
                                 $_SESSION["Email"]      = $row["fdEmail"];
                                 $_SESSION["Admin"]      = $row["fdAdmin"];
-                                redirectJS("USER","Welcome+back+".$_SESSION["FullName"]);
+                                //redirectJS("USER","Welcome+back+".$_SESSION["FullName"]);
                             } else {
-                                redirectJS("USER","Bad+Email+or+Bad+Password","email_last=".formRequest("email"));
+                                //redirectJS("USER","Bad+Email+or+Bad+Password","email_last=".formRequest("email"));
                             }
                         }
                     } else {
