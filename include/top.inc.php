@@ -10,7 +10,7 @@ session_start();
 // Utils::prettyPrint("SELECT * FROM Seemus.tbTable;");
 
 
-function redirectJS($newActivity,$redirReason,$otherParams) {
+function redirectJS($newActivity,$redirReason,$otherParams="") {
   echo("<script>window.location='index.php?activity=".$newActivity."&reason=".$redirReason."&".$otherParams."';</script>");
   return true;
 }

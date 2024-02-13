@@ -12,6 +12,7 @@ $activity = formRequest("activity");
     </head>
     <body>
         <div class="navigation" style="text-align:center">
+        <a href="index.php">HOME</a> | 
         <?php
             if($_SESSION["Email"]) {
                 echo $_SESSION["Email"] & " | ";
@@ -53,6 +54,7 @@ $activity = formRequest("activity");
                                 $_SESSION["FullName"]   = $row["fdFullName"];
                                 $_SESSION["Email"]      = $row["fdEmail"];
                                 $_SESSION["Admin"]      = $row["fdAdmin"];
+                                redirectJS("USER","Welcome+back+".$_SESSION["FullName"]);
                             } else {
                                 redirectJS("USER","Bad+Email+or+Bad+Password","email_last=".formRequest("email"));
                             }
@@ -67,7 +69,7 @@ $activity = formRequest("activity");
                 // User Logout
                 $tmp_email = $_SESSION["Email"];
                 session_destroy();
-                redirectJS("","Successfully Logged Off","");
+                redirectJS(""," successfully logged off!");
             break;
 
             case "VIEW":
@@ -92,6 +94,7 @@ $activity = formRequest("activity");
 
             default:
                 //default viewing of content
+                echo "Welcome to SEEMUS!";
             break;
         }
         ?>
