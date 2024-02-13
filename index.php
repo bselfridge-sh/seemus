@@ -2,7 +2,6 @@
 include "include/top.inc.php";
 include "class/Utils.class.php";
 
-
 $activity = formRequest("activity");
 
 ?>
