@@ -63,7 +63,7 @@ $activity = formRequest("activity");
                       $fdFileName = $_FILES['File']['name'];
                       $fdFileSize = $_FILES['File']['size'];
                       $fdDateTime = date('Y-M-D G:i:s');
-                      
+                      echo $fdFileType;
                       $sql = "INSERT INTO tbFiles ( fdFileType , fdFile, fdFileName, fdFileSize, fdDateTime) 
                                           VALUES  (:fdFileType ,:fdFile,:fdFileName,:fdFileSize,:fdDateTime)";
                       $statement = $conn->prepare($sql);
