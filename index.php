@@ -53,21 +53,7 @@ $activity = formRequest("activity");
                 echo "<div class=\"reason\">" . formRequest("reason") . "</div>";
             }
         switch($activity) {
-          case "FILE-VIEW":
-            $sql = "SELECT id,fdFile, fdFilename,fdFileType,fdFileSize,fdDateTime,fdArchive FROM `tbFiles` WHERE id = " . formRequest("id");
 
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-      
-            // Check if $result has anything in it or not (Returns a FALSE if no data in there).
-            if($result) {
-              header("Content-Type: image/jpeg");
-              while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo $row["fdFile"];
-              }
-            }
-            break;
           case "FILE-CREATE-PROCESS":
               // echo $_FILES['File']["name"];
             if($activity=="FILE-CREATE-PROCESS") {
@@ -149,7 +135,7 @@ $activity = formRequest("activity");
                   $i=$i+1;
                   echo "<td><a href=\"index.php?activity=FILE-UPDATE-FORM&id=" . $row["id"] . "&order=$order\">UPDATE</a></td>";
                   echo "<td><a href=\"index.php?activity=FILE-DELETE-PROCESS&id=".$row["id"]."&order=$order\">DELETE</a></td>";
-                  echo "<td><a href=\"index.php?activity=FILE-VIEW&id=".$row["id"]."\" target=\"_blank\">VIEW</a></td>";
+                  echo "<td><a href=\"view.php?id=".$row["id"]."\" target=\"_blank\">VIEW</a></td>";
                   foreach($row as $col_name => $val) {
                     echo "<td>$val</td>";    // Print Each Field VALUE
                   }
