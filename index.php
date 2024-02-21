@@ -71,7 +71,7 @@ $activity = formRequest("activity");
                       $statement->bindParam('fdFileData',$fdFile,  PDO::PARAM_STR);
                       $statement->bindParam('fdFileType',$fdFileType,  PDO::PARAM_INT);
                       $statement->bindParam('fdFileName',$fdFileName,  PDO::PARAM_STR);
-                      $statement->bindParam('fdFileSize',$fdFileSize,  PDO::PARAM_STR);
+                      $statement->bindParam('fdFileSize',$fdFileSize,  PDO::PARAM_INT);
                       $statement->bindParam('fdDateTime',$fdDateTime,  PDO::PARAM_STR);                      
                       
                       $current_id = $statement->execute() or die("<b>Error:</b> Problem on Image Insert<br/>" . mysqli_connect_error());
