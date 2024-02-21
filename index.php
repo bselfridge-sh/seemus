@@ -54,10 +54,13 @@ $activity = formRequest("activity");
             }
 
         switch($activity) {
+            case "FILE-CREATE-PROCESS":
+                echo $_FILES['upload_file']["name"];
+
             case "FILES": // File Listing
 
                 ?>
-                <form action="index.php">
+                <form action="index.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="activity" value="FILE-CREATE-PROCESS">
                 <input type="hidden" name="order" value="<?php echo formRequest("order"); ?>">
                 <input type="file" name="File" placeholder="File" value="">
