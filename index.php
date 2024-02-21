@@ -55,7 +55,7 @@ $activity = formRequest("activity");
         switch($activity) {
             case "FILE-CREATE-PROCESS":
                 // echo $_FILES['File']["name"];
-
+              if($activity=="FILE-CREATE-PROCESS") {
                 if (count($_FILES) > 0) {
                   if (is_uploaded_file($_FILES['File']['tmp_name'])) {
                       $fdFile = file_get_contents($_FILES['File']['tmp_name']);
@@ -73,8 +73,16 @@ $activity = formRequest("activity");
                       $statement->bindParam('fdFileSize',$fdFileSize,  PDO::PARAM_INT);
                       $statement->bindParam('fdDateTime',$fdDateTime,  PDO::PARAM_STR);                      
                       
-                      $current_id = $statement->execute() or die("<b>Error:</b> Problem on Image Insert<br/>" . mysqli_connect_error());
+                      $current_id = $statement->execute();
                   }
+              }
+            }
+
+            case "FILE-DELETE-PROCESS":
+              if($activity=="FILE-DELETE-PROCESS") {
+                      $sql = "DELETE FROM tbFiles WHERE id = ". formRequest("id");
+                      $statement = $conn->prepare($sql);
+                      $current_id = $statement->execute();
               }
 
 
