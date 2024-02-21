@@ -14,7 +14,7 @@ $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 if($result) {
     header("Content-Type: image/jpeg");
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    echo $row["fdFile:"];
+    echo $row["fdFile"];
     }
 }
 
