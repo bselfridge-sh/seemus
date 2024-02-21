@@ -86,7 +86,6 @@ $activity = formRequest("activity");
                     $statement->bindParam('fdFileType',$fdFileType,  PDO::PARAM_STR);
                     $statement->bindParam('fdFileName',$fdFileName,  PDO::PARAM_STR);
                     $statement->bindParam('fdFileSize',$fdFileSize,  PDO::PARAM_INT);
-                    $statement->bindParam('fdDateTime',$fdDateTime,  PDO::PARAM_STR);                      
                     
                     $current_id = $statement->execute();
                 }
