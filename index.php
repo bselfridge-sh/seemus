@@ -58,13 +58,21 @@ $activity = formRequest("activity");
 
                 if (count($_FILES) > 0) {
                   if (is_uploaded_file($_FILES['File']['tmp_name'])) {
-                      $imgData = file_get_contents($_FILES['File']['tmp_name']);
-                      $imgType = $_FILES['File']['type'];
-                      $sql = "INSERT INTO tbFiles (fdFileType ,fdFile) VALUES (:FileType, :FileData)";
+                      $fdFile = file_get_contents($_FILES['File']['tmp_name']);
+                      $fdFileType = $_FILES['File']['type'];
+                      $fdFileName = $_FILES['File']['name'];
+                      $fdFileSize = $_FILES['File']['size'];
+                      $fdDateTime = date('Y-M-D G:i:s');
+                      
+                      $sql = "INSERT INTO tbFiles (fdArchive, fdFileType , fdFile, fdFileName, fdFileSize, fdDateTime) 
+                                          VALUES  (0,        :fdFileType ,:fdFile,:fdFileName,:fdFileSize,:fdDateTime)";
                       $statement = $conn->prepare($sql);
 
-                      $statement->bindParam('FileType',$imgType, PDO::PARAM_INT);
-                      $statement->bindParam('FileData',$imgData,  PDO::PARAM_STR);
+                      $statement->bindParam('fdFileData',$fdFile,  PDO::PARAM_STR);
+                      $statement->bindParam('fdFileType',$fdFileType,  PDO::PARAM_INT);
+                      $statement->bindParam('fdFileName',$fdFileName,  PDO::PARAM_STR);
+                      $statement->bindParam('fdFileSize',$fdFileSize,  PDO::PARAM_STR);
+                      $statement->bindParam('fdDateTime',$fdDateTime,  PDO::PARAM_STR);                      
                       
                       $current_id = $statement->execute() or die("<b>Error:</b> Problem on Image Insert<br/>" . mysqli_connect_error());
                   }
@@ -104,6 +112,7 @@ $activity = formRequest("activity");
                       echo "<th>##</th>";
                       echo "<th>UPDATE</th>";
                       echo "<th>DELETE</th>";
+                      echo "<th>VIEW</th>";
                       foreach($row as $col_name => $val) {
                         if($order == "`$col_name`") {
                           echo "<th><a href=\"index.php?activity=FILES&order=`$col_name` DESC\">$col_name</a></th>";    
@@ -118,8 +127,8 @@ $activity = formRequest("activity");
                     echo "<td>" . $i . "</td>";
                     $i=$i+1;
                     echo "<td><a href=\"index.php?activity=FILE-UPDATE-FORM&id=" . $row["id"] . "&order=$order\">UPDATE</a></td>";
-          echo "<td><a href='index.php?activity=FILE-DELETE-PROCESS&id=".$row["id"]."&order=$order'>DELETE</a></td>";
-          
+                    echo "<td><a href=\"index.php?activity=FILE-DELETE-PROCESS&id=".$row["id"]."&order=$order\">DELETE</a></td>";
+                    echo "<td><a href=\"index.php?activity=FILE-VIEW&id=".$row["id"]."\">VIEW</a></td>";
                     foreach($row as $col_name => $val) {
                       echo "<td>$val</td>";    // Print Each Field VALUE
                     }
