@@ -52,10 +52,11 @@ $activity = formRequest("activity");
             if(!formRequest("reason")=="") {
                 echo "<div class=\"reason\">" . formRequest("reason") . "</div>";
             }
-echo $activity;
         switch($activity) {
             case "FILE-CREATE-PROCESS":
-                echo $_FILES['upload_file']["name"];
+                echo $activity."<BR>";
+
+                echo $_FILES['File']["name"];
 
             case "FILES": // File Listing
 
