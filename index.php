@@ -117,7 +117,7 @@ $activity = formRequest("activity");
                   if($firstRowPrinted == false) {
                     echo "<tr>";               // Start HEADER Row
                     echo "<th>##</th>";
-                    echo "<th>UPDATE</th>";
+                    //echo "<th>UPDATE</th>";
                     echo "<th>DELETE</th>";
                     echo "<th>VIEW</th>";
                     foreach($row as $col_name => $val) {
@@ -133,7 +133,7 @@ $activity = formRequest("activity");
                   echo "<tr>";               // Start Row
                   echo "<td>" . $i . "</td>";
                   $i=$i+1;
-                  echo "<td><a href=\"index.php?activity=FILE-UPDATE-FORM&id=" . $row["id"] . "&order=$order\">UPDATE</a></td>";
+                  //echo "<td><a href=\"index.php?activity=FILE-UPDATE-FORM&id=" . $row["id"] . "&order=$order\">UPDATE</a></td>";
                   echo "<td><a href=\"index.php?activity=FILE-DELETE-PROCESS&id=".$row["id"]."&order=$order\">DELETE</a></td>";
                   echo "<td><a href=\"view.php?id=".$row["id"]."\" target=\"_blank\">VIEW</a></td>";
                   foreach($row as $col_name => $val) {
