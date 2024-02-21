@@ -88,7 +88,7 @@ $activity = formRequest("activity");
 
           case "FILES": // File Listing
 
-              ?>
+              ?><br>
               <form action="index.php" method="post" enctype="multipart/form-data">
               <input type="hidden" name="activity" value="FILE-CREATE-PROCESS">
               <input type="hidden" name="order" value="<?php echo formRequest("order"); ?>">
