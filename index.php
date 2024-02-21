@@ -68,7 +68,7 @@ $activity = formRequest("activity");
                                           VALUES  (:fdFileType ,:fdFile,:fdFileName,:fdFileSize,:fdDateTime)";
                       $statement = $conn->prepare($sql);
                       $statement->bindParam('fdFile',    $fdFile,      PDO::PARAM_STR);
-                      $statement->bindParam('fdFileType',$fdFileType,  PDO::PARAM_INT);
+                      $statement->bindParam('fdFileType',$fdFileType,  PDO::PARAM_STR);
                       $statement->bindParam('fdFileName',$fdFileName,  PDO::PARAM_STR);
                       $statement->bindParam('fdFileSize',$fdFileSize,  PDO::PARAM_INT);
                       $statement->bindParam('fdDateTime',$fdDateTime,  PDO::PARAM_STR);                      
