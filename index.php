@@ -62,9 +62,7 @@ $activity = formRequest("activity");
                 <input type="hidden" name="activity" value="FILE-CREATE-PROCESS">
                 <input type="hidden" name="order" value="<?php echo formRequest("order"); ?>">
                 <input type="text" name="FileName" placeholder="FileName" value=""><br>
-                <input type="text" name="LastName" placeholder="LastName" value=""><br>
-                <input type="text" name="Email" placeholder="Email" value=""><br>
-                <input type="text" name="Phone" placeholder="Phone" value=""><br>
+                <input type="file" name="File" placeholder="File" value=""><br>
                 <input type="submit" value="UPDATE!"><br>
                 </form>
                 <?php
