@@ -60,7 +60,7 @@ $activity = formRequest("activity");
                 <form action="index.php">
                 <input type="hidden" name="activity" value="FILE-CREATE-PROCESS">
                 <input type="hidden" name="order" value="<?php echo formRequest("order"); ?>">
-                <input type="file" name="File" placeholder="File" value=""><br>
+                <input type="file" name="File" placeholder="File" value="">
                 <input type="submit" value="UPLOAD!"><br>
                 </form>
                 <?php
