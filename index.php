@@ -82,7 +82,7 @@ $activity = formRequest("activity");
                 </form>
                 <?php
 
-                $sql = "SELECT * FROM `tbFiles`";
+                $sql = "SELECT id,fdFilename,fdFileType,fdFileSize,fdDateTime,fdArchive FROM `tbFiles`";
 
                 $order=formRequest("order");
                 if($order!=""){
