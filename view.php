@@ -12,9 +12,9 @@ $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
 // Check if $result has anything in it or not (Returns a FALSE if no data in there).
 if($result) {
-    header("Content-Type: image/jpeg");
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    echo $row["fdFile"];
+        header("Content-Type: " . $row["fdFileType"]);
+        echo $row["fdFile"];
     }
 }
 
