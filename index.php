@@ -1,9 +1,12 @@
 <?php
 include "include/top.inc.php";
 include "class/Utils.class.php";
+include "class/User.Class.php";
+
+$User = new User();
 
 $activity = formRequest("activity");
- 
+
 ?>
 <html>
     <head>
@@ -32,7 +35,7 @@ $activity = formRequest("activity");
             if($_SESSION["Admin"]==1 || $_SESSION["Email"]) { 
                 ?>
                 <a href="index.php?activity=CONTENT">CONTENT</a> | 
-                <a href="index.php?activity=USERS">FILES</a> | 
+                <a href="index.php?activity=FILES">FILES</a> | 
                 <?php
             }
             
