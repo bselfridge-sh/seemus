@@ -32,7 +32,7 @@ $activity = formRequest("activity");
             }
 
             //Admin AND Valid User Navigation Options
-            if($_SESSION["Admin"]==1 || $_SESSION["Email"]) { 
+            if($_SESSION["Email"]) { 
                 ?>
                 <a href="index.php?activity=CONTENT">CONTENT</a> | 
                 <a href="index.php?activity=FILES">FILES</a> | 
@@ -54,6 +54,56 @@ $activity = formRequest("activity");
             }
 
         switch($activity) {
+            case "FILES": // File Listing
+
+                $sql = "SELECT * FROM `tbFiles`";
+
+                $order=formRequest("order");
+                if($order!=""){
+                  $sql = $sql . "ORDER BY $order";
+                }
+                
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+          
+                // Check if $result has anything in it or not (Returns a FALSE if no data in there).
+                if($result) {
+                  echo "<table border=1>";   // Start Table
+                  $firstRowPrinted = false;
+                  $i=1;
+                  while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    if($firstRowPrinted == false) {
+                      echo "<tr>";               // Start HEADER Row
+                      echo "<th>##</th>";
+                      echo "<th>UPDATE</th>";
+                      echo "<th>DELETE</th>";
+                      foreach($row as $col_name => $val) {
+                        if($order == "`$col_name`") {
+                          echo "<th><a href=\"index.php?order=`$col_name` DESC\">$col_name</a></th>";    
+                        } else {
+                          echo "<th><a href=\"index.php?order=`$col_name`\">$col_name</a></th>"; 
+                        }
+                      }
+                      echo "</tr>";               // END Header Row
+                      $firstRowPrinted = true;
+                    }
+                    echo "<tr>";               // Start Row
+                    echo "<td>" . $i . "</td>";
+                    $i=$i+1;
+                    echo "<td><a href=\"index.php?activity=FILE-UPDATE-FORM&id=" . $row["id"] . "&order=$order\">UPDATE</a></td>";
+          echo "<td><a href='index.php?activity=FILE-DELETE-PROCESS&id=".$row["id"]."&order=$order'>DELETE</a></td>";
+          
+                    foreach($row as $col_name => $val) {
+                      echo "<td>$val</td>";    // Print Each Field VALUE
+                    }
+                    echo "</tr>";               // Start Row
+                  }
+                  echo "</table>";
+                }
+
+                break;
+
             case "USER": // User Logon
                 if(formRequest("email") == "") {
                     ?>
