@@ -67,7 +67,7 @@ $activity = formRequest("activity");
                       $sql = "INSERT INTO tbFiles ( fdFileType , fdFile, fdFileName, fdFileSize, fdDateTime) 
                                           VALUES  (:fdFileType ,:fdFile,:fdFileName,:fdFileSize,:fdDateTime)";
                       $statement = $conn->prepare($sql);
-                      $statement->bindParam('fdFile',    $fdFile,      aPDO::PARAM_STR);
+                      $statement->bindParam('fdFile',    $fdFile,      PDO::PARAM_STR);
                       $statement->bindParam('fdFileType',$fdFileType,  PDO::PARAM_INT);
                       $statement->bindParam('fdFileName',$fdFileName,  PDO::PARAM_STR);
                       $statement->bindParam('fdFileSize',$fdFileSize,  PDO::PARAM_INT);
