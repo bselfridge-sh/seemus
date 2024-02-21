@@ -124,7 +124,7 @@ $activity = formRequest("activity");
                       if($order == "`$col_name`") {
                         echo "<th><a href=\"index.php?activity=FILES&order=`$col_name` DESC\">$col_name</a></th>";    
                       } else {
-                        echo "<th><a href=\"index.php?order=`$col_name`\">$col_name</a></th>"; 
+                        echo "<th><a href=\"index.php?activity=FILES&order=`$col_name`\">$col_name</a></th>"; 
                       }
                     }
                     echo "</tr>";               // END Header Row
