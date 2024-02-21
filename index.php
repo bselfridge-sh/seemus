@@ -56,8 +56,7 @@ $activity = formRequest("activity");
             case "FILE-CREATE-PROCESS":
                 // echo $_FILES['File']["name"];
 
-                $target_dir = "/tmp/";
-                
+                $target_dir = "/file_uploads/";
                 $target_file = $target_dir . basename($_FILES["File"]["name"]);
                 $uploadOk = 1;
                 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
