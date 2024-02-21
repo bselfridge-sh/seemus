@@ -56,19 +56,14 @@ $activity = formRequest("activity");
         switch($activity) {
             case "FILES": // File Listing
 
-
                 ?>
                 <form action="index.php">
                 <input type="hidden" name="activity" value="FILE-CREATE-PROCESS">
                 <input type="hidden" name="order" value="<?php echo formRequest("order"); ?>">
-                <input type="text" name="FileName" placeholder="FileName" value=""><br>
                 <input type="file" name="File" placeholder="File" value=""><br>
-                <input type="submit" value="UPDATE!"><br>
+                <input type="submit" value="UPLOAD!"><br>
                 </form>
                 <?php
-        
-
-
 
                 $sql = "SELECT * FROM `tbFiles`";
 
