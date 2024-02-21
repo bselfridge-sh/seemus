@@ -56,54 +56,19 @@ $activity = formRequest("activity");
             case "FILE-CREATE-PROCESS":
                 // echo $_FILES['File']["name"];
 
-                $target_dir = "/tmp/";
-                $target_file = $target_dir . basename($_FILES["File"]["name"]);
-                $uploadOk = 1;
-                $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-                
-                // Check if image file is a actual image or fake image
-                if(isset($_POST["Submit"])) {
-                  $check = getimagesize($_FILES["File"]["tmp_name"]);
-                  if($check !== false) {
-                    echo "File is an image - " . $check["mime"] . ".";
-                    $uploadOk = 1;
-                  } else {
-                    echo "File is not an image.";
-                    $uploadOk = 0;
-                  }
-                }
-                
-                // Check if file already exists
-                if (file_exists($target_file)) {
-                  echo "Sorry, file already exists.";
-                  $uploadOk = 0;
-                }
-                
-                // Check file size
-                if ($_FILES["File"]["size"] > 5000000) {
-                  echo "Sorry, your file is too large.";
-                  $uploadOk = 0;
-                }
-                
-                // Allow certain file formats
-                if($imageFileType != "pdf" && $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                && $imageFileType != "gif" ) {
-                  echo "Sorry, only PDF, JPG, JPEG, PNG & GIF files are allowed.";
-                  $uploadOk = 0;
-                }
-                
-                // Check if $uploadOk is set to 0 by an error
-                if ($uploadOk == 0) {
-                  echo "Sorry, your file was not uploaded.";
-                // if everything is ok, try to upload file
-                } else {
-                  if (move_uploaded_file($_FILES["File"]["tmp_name"], $target_file)) {
-                    echo "The file ". htmlspecialchars( basename( $_FILES["File"]["name"])). " has been uploaded.";
-                  } else {
-                    echo "Sorry, there was an error uploading your file.";
-                  }
-                }
+                if (count($_FILES) > 0) {
+                  if (is_uploaded_file($_FILES['File']['tmp_name'])) {
+                      $imgData = file_get_contents($_FILES['File']['tmp_name']);
+                      $imgType = $_FILES['File']['type'];
+                      $sql = "INSERT INTO tbFiles (fdFileType ,fdFile) VALUES (:FileType, :FileData)";
+                      $statement = $conn->prepare($sql);
 
+                      $statement->bindParam('FileType',$imgType, $PDO::PARAM_INT);
+                      $statement->bindParam('FileData',$imgData,  $PDO::PARAM_STR);
+                      
+                      $current_id = $statement->execute() or die("<b>Error:</b> Problem on Image Insert<br/>" . mysqli_connect_error());
+                  }
+              }
 
 
             case "FILES": // File Listing
