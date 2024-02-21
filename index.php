@@ -64,10 +64,10 @@ $activity = formRequest("activity");
                       $fdFileSize = $_FILES['File']['size'];
                       $fdDateTime = date('Y-M-D G:i:s');
                       
-                      $sql = "INSERT INTO tbFiles (fdArchive, fdFileType , fdFile, fdFileName, fdFileSize, fdDateTime) 
-                                          VALUES  (0,        :fdFileType ,:fdFile,:fdFileName,:fdFileSize,:fdDateTime)";
+                      $sql = "INSERT INTO tbFiles ( fdFileType , fdFile, fdFileName, fdFileSize, fdDateTime) 
+                                          VALUES  (:fdFileType ,:fdFile,:fdFileName,:fdFileSize,:fdDateTime)";
                       $statement = $conn->prepare($sql);
-
+echo $sql;
                       $statement->bindParam('fdFileData',$fdFile,  PDO::PARAM_STR);
                       $statement->bindParam('fdFileType',$fdFileType,  PDO::PARAM_INT);
                       $statement->bindParam('fdFileName',$fdFileName,  PDO::PARAM_STR);
