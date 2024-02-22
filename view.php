@@ -26,6 +26,7 @@ if($activity=="FILE") {
     $stmt->execute();
     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
     // Check if $result has anything in it or not (Returns a FALSE if no data in there).
+    echo "|".$result ."|<BR><BR>";
     if($result) {
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             ob_clean();
@@ -37,7 +38,6 @@ if($activity=="FILE") {
                 </head>
                 <body>
                     <?php
-echo "|".$result ."|<BR><BR>";
 echo $row["fdContent"];
                     ?>
                 </body>
