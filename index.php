@@ -150,7 +150,7 @@ $activity = formRequest("activity");
 
               case "CONTENT": // File Listing
   
-                $sql = "SELECT id,fdTitle,CONCAT_WS('',left(fdContent,100),'...') as fdContent,fdDateTime,fdArchive FROM `tbContent`";
+                $sql = "SELECT id,fdTitle,CONCAT_WS('',left(fdContent,100),'...') as fdContent,fdArchive,fdDateTime FROM `tbContent`";
   
                 $order=formRequest("order");
                 if($order!=""){
@@ -187,11 +187,11 @@ $activity = formRequest("activity");
                       ?>
                       <tr>
                       <td>+</td>
-                      <td colspan=3><input type="submit" name="Submit" value="ADD CONTENT!"></td>
+                      <td colspan=4><input type="submit" name="Submit" value="ADD CONTENT!"></td>
                       <td><input type="text" name="fdTitle" value="" placeholder ="fdTitle" ><td>
-                      <td><input type="text" name="fdContent" value="" placeholder ="fdContent" ><td>
-                      <td><i>AUTO</i><td>
+                      <td><input type="text" name="fdContent" value="" placeholder ="fdContent" ></td>
                       <td><select name="fdArchive"><option selected value=0>No</option><option value=1>Yes</option></select></td>
+                      <td><i>AUTO</i><td>
                       </tr>
                       <?php
                       $firstRowPrinted = true;
