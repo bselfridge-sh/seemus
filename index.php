@@ -106,10 +106,9 @@ $activity = formRequest("activity");
               
               $stmt = $conn->prepare($sql);
               $stmt->execute();
-              $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+              $stmt->setFetchMode(PDO::FETCH_ASSOC);
         
               // Check if $result has anything in it or not (Returns a FALSE if no data in there).
-              if($result) {
                 echo "<table border=1>";   // Start Table
                 $firstRowPrinted = false;
                 $i=1;
@@ -142,7 +141,6 @@ $activity = formRequest("activity");
                   echo "</tr>";               // Start Row
                 }
                 echo "</table>";
-              }
 
               break;
 
@@ -187,10 +185,9 @@ $activity = formRequest("activity");
                 
                 $stmt = $conn->prepare($sql);
                 $stmt->execute();
-                $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
           
                 // Check if $result has anything in it or not (Returns a FALSE if no data in there).
-                if($result) {
                   echo "<form action=\"index.php\" method=\"post\">";
                   echo "<input type=\"hidden\" name=\"activity\" value=\"CONTENT-CREATE-PROCESS\">";
                   echo "<input type=\"hidden\" name=\"order\" value=\"" .formRequest("order") . "\">";
@@ -237,7 +234,6 @@ $activity = formRequest("activity");
                   }
                   echo "</table>";
                   echo "</form>";
-                }
   
                 break;
   
