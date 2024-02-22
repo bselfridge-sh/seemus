@@ -150,7 +150,7 @@ $activity = formRequest("activity");
 
               case "CONTENT": // File Listing
   
-                $sql = "SELECT id,fdTitle,left(fdContent,100),fdDateTime,fdArchive FROM `tbContent`";
+                $sql = "SELECT id,fdTitle,WS_CONCATE('',left(fdContent,100),'...') as fdContent,fdDateTime,fdArchive FROM `tbContent`";
   
                 $order=formRequest("order");
                 if($order!=""){
