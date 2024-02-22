@@ -54,27 +54,6 @@ $activity = formRequest("activity");
             }
         switch($activity) {
 
-          case "CONTENT-CREATE-PROCESS":
-            if($activity=="CONTENT-CREATE-PROCESS") {
-
-              if (count($_REQUEST) > 0) {
-                $fdContent   = formRequest("fdContent");
-                $fdTitle     = formRequest("fdTitle");
-                $fdArchive   = formRequest("fdArchive");
-
-                  $sql = "INSERT INTO tbContent ( fdContent , fdTitle, fdArchive, fdDateTime) 
-                                      VALUES    (:fdContent ,:fdTitle,:fdArchive, now())";
-                  $statement = $conn->prepare($sql);
-                  $statement->bindParam('fdContent',    $fdFile,      PDO::PARAM_STR);
-                  $statement->bindParam('fdTitle',$fdFileType,  PDO::PARAM_STR);
-                  $statement->bindParam('fdArchive',$fdFileName,  PDO::PARAM_STR);
-                  
-                  $current_id = $statement->execute();
-      
-              }
-            }
-
-
           case "FILE-CREATE-PROCESS":
               // echo $_FILES['File']["name"];
             if($activity=="FILE-CREATE-PROCESS") {
@@ -168,7 +147,28 @@ $activity = formRequest("activity");
               break;
 
 
-
+              case "CONTENT-CREATE-PROCESS":
+                if($activity=="CONTENT-CREATE-PROCESS") {
+    
+                  if (count($_REQUEST) > 0) {
+                    $fdContent   = formRequest("fdContent");
+                    $fdTitle     = formRequest("fdTitle");
+                    $fdArchive   = formRequest("fdArchive");
+    
+                      $sql = "INSERT INTO tbContent ( fdContent , fdTitle, fdArchive, fdDateTime) 
+                                          VALUES    (:fdContent ,:fdTitle,:fdArchive, now())";
+                      $statement = $conn->prepare($sql);
+                      $statement->bindParam('fdContent',    $fdFile,      PDO::PARAM_STR);
+                      $statement->bindParam('fdTitle',$fdFileType,  PDO::PARAM_STR);
+                      $statement->bindParam('fdArchive',$fdFileName,  PDO::PARAM_STR);
+                      
+                      $current_id = $statement->execute();
+          
+                  }
+                }
+    
+    
+    
               case "CONTENT": // File Listing
   
                 $sql = "SELECT id,fdTitle,CONCAT_WS('',left(fdContent,100),'...') as fdContent,fdArchive,fdDateTime FROM `tbContent`";
