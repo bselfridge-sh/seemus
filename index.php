@@ -47,7 +47,7 @@ $activity = formRequest("activity");
             }
             ?>
         </div>
-        <center><div class="body" style="width:500px;">
+        <center><div class="body">
         <?php
             if(!formRequest("reason")=="") {
                 echo "<div class=\"reason\">" . formRequest("reason") . "</div>";
