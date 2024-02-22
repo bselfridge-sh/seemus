@@ -191,7 +191,7 @@ $activity = formRequest("activity");
                       <td><input type="text" name="fdTitle" value="" placeholder ="fdTitle" ></td>
                       <td><input type="text" name="fdContent" value="" placeholder ="fdContent" ></td>
                       <td><select name="fdArchive"><option selected value=0>No</option><option value=1>Yes</option></select></td>
-                      <td><i>AUTO</i><td>
+                      <td><i>AUTO</i></td>
                       </tr>
                       <?php
                       $firstRowPrinted = true;
