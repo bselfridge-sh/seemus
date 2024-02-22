@@ -187,7 +187,7 @@ $activity = formRequest("activity");
                       ?>
                       <tr>
                       <td>+</td>
-                      <td colspan=4><input type="submit" name="Submit" value="ADD CONTENT!"></td>
+                      <td colspan=4 align=center><input type="submit" name="Submit" value="ADD CONTENT!"></td>
                       <td><input type="text" name="fdTitle" value="" placeholder ="fdTitle" ><td>
                       <td><input type="text" name="fdContent" value="" placeholder ="fdContent" ></td>
                       <td><select name="fdArchive"><option selected value=0>No</option><option value=1>Yes</option></select></td>
