@@ -166,7 +166,7 @@ $activity = formRequest("activity");
                   echo "<form action=\"index.php\" method=\"post\">";
                   echo "<input type=\"hidden\" name=\"activity\" value=\"CONTENT-CREATE-PROCESS\">";
                   echo "<input type=\"hidden\" name=\"order\" value=\"" .formRequest("order") . "\">";
-                  echo "<table border=1>";   // Start Table
+                  echo "<BR><BR><BR><table border=1>";   // Start Table
                   $firstRowPrinted = false;
                   $i=1;
                   while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
