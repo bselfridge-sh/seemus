@@ -158,9 +158,9 @@ $activity = formRequest("activity");
                       $sql = "INSERT INTO tbContent ( fdContent , fdTitle, fdArchive, fdDateTime) 
                                           VALUES    (:fdContent ,:fdTitle,:fdArchive, now())";
                       $statement = $conn->prepare($sql);
-                      $statement->bindParam('fdContent',    $fdFile,      PDO::PARAM_STR);
-                      $statement->bindParam('fdTitle',$fdFileType,  PDO::PARAM_STR);
-                      $statement->bindParam('fdArchive',$fdFileName,  PDO::PARAM_STR);
+                      $statement->bindParam('fdContent',$fdContent, PDO::PARAM_STR);
+                      $statement->bindParam('fdTitle',$fdTitle,     PDO::PARAM_STR);
+                      $statement->bindParam('fdArchive',$fdArchive, PDO::PARAM_STR);
                       
                       $current_id = $statement->execute();
           
