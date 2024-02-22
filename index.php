@@ -167,8 +167,15 @@ $activity = formRequest("activity");
                   }
                 }
     
-    
-    
+
+              case "CONTENT-DELETE-PROCESS":
+                if($activity=="CONTENT-DELETE-PROCESS") {
+                        $sql = "DELETE FROM tbContent WHERE id = ". formRequest("id");
+                        $statement = $conn->prepare($sql);
+                        $current_id = $statement->execute();
+                }
+        
+  
               case "CONTENT": // File Listing
   
                 $sql = "SELECT id,fdTitle,CONCAT_WS('',left(fdContent,100),'...') as fdContent,fdArchive,fdDateTime FROM `tbContent`";
