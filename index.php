@@ -135,7 +135,7 @@ $activity = formRequest("activity");
                   $i=$i+1;
                   //echo "<td><a href=\"index.php?activity=FILE-UPDATE-FORM&id=" . $row["id"] . "&order=$order\">UPDATE</a></td>";
                   echo "<td><a href=\"index.php?activity=FILE-DELETE-PROCESS&id=".$row["id"]."&order=$order\">DELETE</a></td>";
-                  echo "<td><a href=\"view.php?id=".$row["id"]."\" target=\"_blank\">VIEW</a></td>";
+                  echo "<td><a href=\"view.php?activity=FILE&id=".$row["id"]."\" target=\"_blank\">VIEW</a></td>";
                   foreach($row as $col_name => $val) {
                     echo "<td>$val</td>";    // Print Each Field VALUE
                   }
@@ -146,7 +146,77 @@ $activity = formRequest("activity");
 
               break;
 
-          case "USER": // User Logon
+
+
+              case "CONTENT": // File Listing
+  
+                $sql = "SELECT id,fdTitle,left(fdContent,100),fdDateTime,fdArchive FROM `tbContent`";
+  
+                $order=formRequest("order");
+                if($order!=""){
+                  $sql = $sql . "ORDER BY $order";
+                }
+                
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+          
+                // Check if $result has anything in it or not (Returns a FALSE if no data in there).
+                if($result) {
+                  echo "<form action=\"index.php\" method=\"post\">";
+                  echo "<input type=\"hidden\" name=\"activity\" value=\"CONTENT-CREATE-PROCESS\">";
+                  echo "<input type=\"hidden\" name=\"order\" value=\"" .formRequest("order") . "\">";
+                  echo "<table border=1>";   // Start Table
+                  $firstRowPrinted = false;
+                  $i=1;
+                  while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    if($firstRowPrinted == false) {
+                      echo "<tr>";               // Start HEADER Row
+                      echo "<th>##</th>";
+                      echo "<th>UPDATE</th>";
+                      echo "<th>DELETE</th>";
+                      echo "<th>VIEW</th>";
+                      foreach($row as $col_name => $val) {
+                        if($order == "`$col_name`") {
+                          echo "<th><a href=\"index.php?activity=CONTENT&order=`$col_name` DESC\">$col_name</a></th>";    
+                        } else {
+                          echo "<th><a href=\"index.php?activity=CONTENT&order=`$col_name`\">$col_name</a></th>"; 
+                        }
+                      }
+                      echo "</tr>";               // END Header Row
+                      ?>
+                      <tr>
+                      <td>+</td>
+                      <td colspan=3><input type="submit" name="Submit" value="ADD CONTENT!"></td>
+                      <td><input type="text" name="fdTitle" value="" placeholder ="fdTitle" ><td>
+                      <td><input type="text" name="fdContent" value="" placeholder ="fdContent" ><td>
+                      <td><i>AUTO</i><td>
+                      <td><select name="fdArchive"><option selected value=0>No</option><option value=1>Yes</option></select></td>
+                      </tr>
+                      <?php
+                      $firstRowPrinted = true;
+                    }
+                    echo "<tr>";               // Start Row
+                    echo "<td>" . $i . "</td>";
+                    $i=$i+1;
+                    echo "<td><a href=\"index.php?activity=CONTENT-UPDATE-FORM&id=" . $row["id"] . "&order=$order\">UPDATE</a></td>";
+                    echo "<td><a href=\"index.php?activity=CONTENT-DELETE-PROCESS&id=".$row["id"]."&order=$order\">DELETE</a></td>";
+                    echo "<td><a href=\"view.php?activity=CONTENT&id=".$row["id"]."\" target=\"_blank\">VIEW</a></td>";
+                    foreach($row as $col_name => $val) {
+                      echo "<td>$val</td>";    // Print Each Field VALUE
+                    }
+                    echo "</tr>";               // Start Row
+                  }
+                  echo "</table>";
+                  echo "</form>";
+                }
+  
+                break;
+  
+
+
+
+            case "USER": // User Logon
               if(formRequest("email") == "") {
                   ?>
                   <form action="index.php" method=post >
